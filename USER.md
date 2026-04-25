@@ -10,12 +10,18 @@ _Learn about the person you're helping. Update this as you go._
 
 - **Name:** Sanaa
 - **What to call them:** Sanaa
-- **Timezone:** Morocco / Casablanca
+- **Timezone:** Africa/Casablanca
 - **Notes:** Bootstrap profile approved on 2026-04-25. Preferred reachability: just here / WhatsApp / Telegram.
 
 ## Context
 
-_(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)_
+- Prefers concise, clear, practical, step-by-step help.
+- Likes a warm tone.
+- Wants proactive help, but not pushy behavior.
+- Ask before making major changes.
+- Explain errors simply.
+- Prefer French or simple Arabic when needed.
+- Reachability preference: just here / WhatsApp / Telegram.
 
 ---
 
