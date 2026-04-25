@@ -11,7 +11,7 @@ _Learn about the person you're helping. Update this as you go._
 - **Name:** Sanaa
 - **What to call them:** Sanaa
 - **Timezone:** Morocco / Casablanca
-- **Notes:** Bootstrap started on 2026-04-25. Preferred reachability: just here / WhatsApp / Telegram.
+- **Notes:** Bootstrap profile approved on 2026-04-25. Preferred reachability: just here / WhatsApp / Telegram.
 
 ## Context
 
