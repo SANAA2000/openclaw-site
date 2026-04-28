@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A simple modern landing page created and deployed with OpenClaw" />
+  <title>My Web Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#hero" class="logo">My Web Project</a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="hero">
+      <div class="container hero-content">
+        <span class="eyebrow">Modern Static Website</span>
+        <h1>Welcome to My Web Project</h1>
+        <p>A simple modern landing page created and deployed with OpenClaw</p>
+        <a href="#contact" class="button">Contact Us</a>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container narrow">
+        <h2>About</h2>
+        <p>
+          This is a modern responsive web page built with pure HTML, CSS, and JavaScript.
+          It is lightweight, fast, easy to deploy, and works directly as a static website.
+        </p>
+      </div>
+    </section>
+
+    <section id="services" class="section section-alt">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Services</h2>
+          <p>Clean structure, modern styling, and deployment-ready static files.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon">01</div>
+            <h3>Web Design</h3>
+            <p>Modern, clean, and responsive interfaces designed for readability and conversion.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">02</div>
+            <h3>Development</h3>
+            <p>Fast static front-end implementation using semantic HTML, CSS, and JavaScript only.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">03</div>
+            <h3>Deployment</h3>
+            <p>Simple deployment flow for static hosting platforms with no framework setup required.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container narrow contact-box">
+        <h2>Contact</h2>
+        <p>If you’d like to get in touch, send an email to:</p>
+        <a class="contact-link" href="mailto:contact@example.com">contact@example.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>© <span id="year"></span> My Web Project. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
