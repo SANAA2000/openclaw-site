@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload de fichiers</title>
+  <style>
+    * { box-sizing: border-box; font-family: Arial, sans-serif; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f4f7fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: #fff;
+      width: 100%;
+      max-width: 500px;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 24px;
+      color: #222;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .field { margin-bottom: 18px; }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #333;
+    }
+    input[type="text"], input[type="email"], input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d0d7e2;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    input[type="file"] {
+      padding: 10px;
+      background: #fafafa;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:hover { background: #1d4ed8; }
+    button:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+    .message {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 10px;
+      display: none;
+      font-size: 14px;
+    }
+    .success {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+    .loading {
+      text-align: center;
+      color: #475569;
+      margin-top: 12px;
+      display: none;
+    }
+    .note {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Envoyer un fichier</h1>
+
+    <form id="uploadForm">
+      <div class="field">
+        <label for="name">Nom</label>
+        <input type="text" id="name" required />
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" required />
+      </div>
+
+      <div class="field">
+        <label for="file">Fichier</label>
+        <input type="file" id="file" required />
+      </div>
+
+      <button type="submit" id="submitBtn">Uploader</button>
+    </form>
+
+    <div class="loading" id="loading">Upload en cours...</div>
+    <div class="message" id="messageBox"></div>
+
+    <div class="note">Les fichiers seront enregistrés automatiquement dans Google Drive.</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const loading = document.getElementById('loading');
+    const messageBox = document.getElementById('messageBox');
+
+    function showMessage(text, type) {
+      messageBox.style.display = 'block';
+      messageBox.className = 'message ' + type;
+      messageBox.textContent = text;
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const fileInput = document.getElementById('file');
+      const file = fileInput.files[0];
+
+      if (!name || !email || !file) {
+        showMessage('Merci de remplir tous les champs.', 'error');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      loading.style.display = 'block';
+      messageBox.style.display = 'none';
+
+      const reader = new FileReader();
+
+      reader.onload = function(event) {
+        const base64Data = event.target.result.split(',')[1];
+
+        google.script.run
+          .withSuccessHandler(function(response) {
+            loading.style.display = 'none';
+            submitBtn.disabled = false;
+
+            if (response.success) {
+              showMessage('Fichier envoyé avec succès !', 'success');
+              form.reset();
+            } else {
+              showMessage(response.message || 'Une erreur est survenue.', 'error');
+            }
+          })
+          .withFailureHandler(function(error) {
+            loading.style.display = 'none';
+            submitBtn.disabled = false;
+            showMessage('Erreur serveur : ' + error.message, 'error');
+          })
+          .uploadFile({
+            name: name,
+            email: email,
+            fileName: file.name,
+            mimeType: file.type,
+            bytes: base64Data
+          });
+      };
+
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
